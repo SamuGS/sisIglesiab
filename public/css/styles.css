@@ -1,0 +1,178 @@
+/* -------------------------------------- */
+/* BASE */
+/* -------------------------------------- */
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/* -------------------------------------- */
+/* HEADER */
+/* -------------------------------------- */
+#main-header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* IZQUIERDA: botón y título */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#sidebar-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Título */
+#main-header h1 {
+    margin: 0;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* DERECHA: info usuario */
+.user-info {
+    flex-shrink: 0;
+}
+
+.user-info a {
+    color: #e67e22;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 6px 12px;
+    transition: all 0.2s ease-in-out;
+}
+
+.user-info a:hover {
+    background-color: #e67e22;
+    color: white;
+    border-color: #e67e22;
+}
+
+/* -------------------------------------- */
+/* CONTENEDOR PRINCIPAL */
+/* -------------------------------------- */
+#main-container {
+    display: flex;
+    padding-top: 60px; /* Evita solaparse con el header */
+}
+
+/* -------------------------------------- */
+/* SIDEBAR */
+/* -------------------------------------- */
+#main-sidebar {
+    width: 200px;
+    background-color: #34495e;
+    color: white;
+    height: calc(100vh - 60px);
+    position: fixed;
+    top: 60px; /* 👈 asegura que quede justo debajo del header */
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden; /* 👈 evita mostrar texto fuera del área */
+    transition: width 0.3s ease, left 0.3s ease;
+    z-index: 900;
+}
+
+/* Enlaces dentro del menú */
+#main-sidebar nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 20px 0; /* 👈 pequeño padding superior para separar del borde */
+}
+
+#main-sidebar nav a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    white-space: nowrap; /* 👈 evita que el texto se parta en 2 líneas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.3s ease;
+}
+
+#main-sidebar nav a:hover {
+    background-color: #2c3e50;
+}
+
+/* COLAPSADO (ocultar texto totalmente) */
+#main-sidebar.collapsed {
+    width: 60px;
+    overflow: hidden; /* oculta el contenido fuera del área visible */
+}
+
+/* Ocultar texto sin perder la estructura */
+#main-sidebar.collapsed a {
+    text-align: center;
+    padding: 15px 0;
+    white-space: nowrap;
+}
+
+/* Si tus enlaces tienen íconos dentro (ej. <i class="bi bi-house"></i>), */
+#main-sidebar.collapsed a span {
+    display: none; /* oculta solo el texto */
+}
+
+/* -------------------------------------- */
+/* CONTENIDO PRINCIPAL */
+/* -------------------------------------- */
+#main-content {
+    flex-grow: 1;
+    margin-left: 200px;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+    background-color: antiquewhite;
+}
+
+#main-content.expanded {
+    margin-left: 60px;
+}
+
+/* -------------------------------------- */
+/* RESPONSIVO */
+/* -------------------------------------- */
+@media (max-width: 768px) {
+    #main-sidebar {
+        position: fixed;
+        top: 60px;
+        left: -250px;
+        height: calc(100vh - 60px);
+    }
+
+    #main-sidebar.collapsed {
+        left: 0;
+        width: 250px;
+    }
+
+    #main-content {
+        margin-left: 0;
+    }
+
+    #main-content.expanded {
+        margin-left: 0;
+    }
+}
